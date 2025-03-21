@@ -4,6 +4,8 @@ import { twJoin } from "tailwind-merge";
 import { ThemeProvider } from "next-themes";
 import "./globals.css";
 import { Layout } from "@/components/layout";
+import AppProvider from "@/providers/provider";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -41,11 +43,13 @@ export default function RootLayout({
           'font-sans antialiased',
         )}
       >
-        <ThemeProvider>
-          <Layout>
-            {children}
-          </Layout>
-        </ThemeProvider>
+        <AppProvider>
+          <ThemeProvider>
+            <Layout>
+              {children}
+            </Layout>
+          </ThemeProvider>
+        </AppProvider>
       </body>
     </html>
   );
