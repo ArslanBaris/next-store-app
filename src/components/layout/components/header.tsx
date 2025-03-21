@@ -1,6 +1,7 @@
 import { APP_NAME } from '@/config/constants'
 import React from 'react'
 import Link from 'next/link'
+import { MiniBasket } from '@/components/mini-baskert/mini-basket'
 
 export default function Header() {
     return (
@@ -12,7 +13,9 @@ export default function Header() {
                     </Link>
 
                     <div className="flex items-center gap-2">
-                        
+                        <div className="hidden md:block">
+                            <MiniBasket />
+                        </div>
                     </div>
                 </div>
             </header>
