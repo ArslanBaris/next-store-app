@@ -5,19 +5,27 @@ import Link from "next/link";
 import { useState } from "react";
 import { Button } from "../ui/button";
 import { Plus } from "lucide-react";
+import { useDispatch } from 'react-redux';
+import { addToCart } from '@/store/cartSlice';
+import { Product } from "@/types/product";
 
-export default function ProductCard({ product }: { product: any }) {
-    const [isFavorite, setIsFavorite] = useState(false);
-    const [cart, setCart] = useState<any[]>([]);
+export default function ProductCard({ product }: { product: Product }) {
+    const dispatch = useDispatch();
 
-    const addToCart = () => {
-        setCart((prev) => [...prev, product]); // Sepete ekleme
+    const handleAddToCart = () => {
+        dispatch(addToCart({
+            id: product.id,
+            title: product.title,
+            image: product.image,
+            price: product.price,
+            amount: 1,
+        }));
         console.log("Added to Cart:", product);
     };
 
     return (
         <>
-            <div className="relative grou">
+            <div className="relative group">
                 <Link href={`/products/${product.id}`}>
                     <div className="group flex flex-col gap-2 md:p-4 border p-4 rounded-lg shadow-lg  bg-white">
                         <div className="p-2">
@@ -44,8 +52,8 @@ export default function ProductCard({ product }: { product: any }) {
                 </Link>
                 
                 <div className="absolute top-3 right-3">
-                    <Button variant={"outline"} size={"sm"} >
-                    <Plus />
+                    <Button variant={"outline"} size={"sm"} onClick={handleAddToCart}>
+                        <Plus />
                     </Button>
                 </div>
             </div>
