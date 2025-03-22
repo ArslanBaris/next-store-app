@@ -2,9 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 import { Button } from "../ui/button";
-import { Plus } from "lucide-react";
+import { Plus, Star } from "lucide-react";
 import { useDispatch } from 'react-redux';
 import { addToCart } from '@/store/cartSlice';
 import { Product } from "@/types/product";
@@ -44,6 +43,11 @@ export default function ProductCard({ product }: { product: Product }) {
                             </h3>
                             <div className="mt-2">
                                 <Price className="text-green-800 font-medium" value={product.price} />
+                            </div>
+                            <div className="flex items-center justify-center gap-1 mt-1 text-yellow-500">
+                                <Star className="w-4 h-4 " />
+                                <span className="text-sm font-medium">{product.rating.rate}</span>
+                                <span className="text-xs text-gray-500">({product.rating.count})</span>
                             </div>
                         </div>
                     </div>
