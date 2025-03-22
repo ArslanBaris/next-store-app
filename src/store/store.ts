@@ -3,6 +3,7 @@ import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { combineReducers } from 'redux';
 import cartReducer from './cartSlice';
+import notificationMiddleware from './notificationMiddleware';
 
 const persistConfig = {
   key: 'root',
@@ -17,6 +18,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
   reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(notificationMiddleware),
 });
 
 export const persistor = persistStore(store);
