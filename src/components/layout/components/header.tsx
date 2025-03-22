@@ -1,7 +1,7 @@
 import { APP_NAME } from '@/config/constants'
 import React from 'react'
 import Link from 'next/link'
-import { MiniBasket } from '@/components/mini-baskert/mini-basket'
+import { MiniBasket } from '@/components/basket/mini-basket'
 
 export default function Header() {
     return (

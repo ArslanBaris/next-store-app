@@ -6,6 +6,7 @@ import { Badge } from '../ui/badge';
 import { getCategoryName } from '@/utils/utils';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '@/store/cartSlice';
+import Price from '../ui/price';
 
 type ProductInfoProps = {
     product: Product;
@@ -42,7 +43,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
                         <div className="text-2xl font-bold">{product.title}</div>
                         <Badge className='' variant={"secondary"}>{getCategoryName(product.category)}</Badge>
                     </div>
-                    <span className="text-primary text-2xl font-semibold">${(product.price).toFixed(2)} </span>
+                    <Price className="text-primary text-2xl font-semibold" value={product.price} />
                     <p className="text-sm">{product.description}</p>
                     <Button variant={"default"} onClick={handleAddToCart}>Add to Cart</Button>
                 </div>

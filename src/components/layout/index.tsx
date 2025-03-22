@@ -19,7 +19,7 @@ export function Layout({ children }: LayoutProps) {
                         <div className="mx-auto max-w-screen-xl p-2 sm:p-6">{children}</div>
                     </div>
                 </div>
-                <div className="sticky bottom-0 z-50 flex justify-center items-center border-t bg-background/60 px-4 backdrop-blur min-h-14">
+                <div className="hidden md:flex sticky bottom-0 z-50 justify-center items-center border-t bg-background/60 px-4 backdrop-blur min-h-14">
                     <p>© {new Date().getFullYear()} {APP_NAME}</p>
                 </div>
             </div>

@@ -8,6 +8,7 @@ import { Plus } from "lucide-react";
 import { useDispatch } from 'react-redux';
 import { addToCart } from '@/store/cartSlice';
 import { Product } from "@/types/product";
+import Price from "../ui/price";
 
 export default function ProductCard({ product }: { product: Product }) {
     const dispatch = useDispatch();
@@ -20,7 +21,6 @@ export default function ProductCard({ product }: { product: Product }) {
             price: product.price,
             amount: 1,
         }));
-        console.log("Added to Cart:", product);
     };
 
     return (
@@ -43,16 +43,14 @@ export default function ProductCard({ product }: { product: Product }) {
                                 {product.title}
                             </h3>
                             <div className="mt-2">
-                                <span className="text-gray-700 font-light">
-                                    ${product.price}
-                                </span>
+                                <Price className="text-green-800 font-medium" value={product.price} />
                             </div>
                         </div>
                     </div>
                 </Link>
-                
+
                 <div className="absolute top-3 right-3">
-                    <Button variant={"outline"} size={"sm"} onClick={handleAddToCart}>
+                    <Button variant={"outline"} className="rounded-full" size={"icon"} onClick={handleAddToCart}>
                         <Plus />
                     </Button>
                 </div>
