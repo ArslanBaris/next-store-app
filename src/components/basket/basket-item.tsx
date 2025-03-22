@@ -6,9 +6,10 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useContext } from "react";
 import { useDispatch } from "react-redux";
+import Price from "../ui/price";
 
 
-const MiniBasketItem = ({ item }: { item: CartItem }) => {
+const BasketItem = ({ item }: { item: CartItem }) => {
 
     const { id, title, image, price, amount } = item;
 
@@ -32,16 +33,16 @@ const MiniBasketItem = ({ item }: { item: CartItem }) => {
     }
 
     return (
-        <div className="flex gap-x-4 lg:px-6 border-b border-gray-200 w-full font-light text-gray-500">
+        <div className="flex gap-x-4 lg:px-3 border-b border-gray-200 w-full font-light text-gray-500">
             <div className="w-full min-h-[130px] flex items-center gap-x-4">
-                <Link href={`/product/${id}`}>
+                <Link href={`/products/${id}`}>
                     <Image src={image} alt={title} width={80} height={80} />
                 </Link>
                 <div className="w-full flex flex-col">
-                    <div className="flex justify-between mb-2">
+                    <div className="flex justify-between mb-2 gap-4">
                         <Link
                             href={`/product/${id}`}
-                            className="text-sm font-medium max-w-[240px] text-primary hover:underline"
+                            className="text-sm font-medium max-w-[350px] text-primary hover:underline"
                         >
                             {title}
                         </Link>
@@ -52,7 +53,7 @@ const MiniBasketItem = ({ item }: { item: CartItem }) => {
                             <X className="text-gray-500 hover:text-red-500 transition" />
                         </div>
                     </div>
-                    <div className="flex gap-x-2 h-[36px] text-sm">
+                    <div className="flex gap-x-4 h-[36px] text-sm">
                         <div className="flex flex-1 max-w-[100px] items-center h-full border text-primary font-medium">
                             <div onClick={() => updateAmount(id, "decrease")} className="h-full flex-1 flex justify-center items-center cursor-pointer">
                                 <Minus size={14} />
@@ -65,12 +66,12 @@ const MiniBasketItem = ({ item }: { item: CartItem }) => {
                             </div>
                         </div>
                         {/* item price */}
-                        <div className="flex flex-1 justify-around items-center">
-                            $ {price}
+                        <div className="flex flex-1 items-center">
+                            <Price value={price} />
                         </div>
                         {/* total price */}
                         <div className="flex flex-1 justify-end items-center text-primary font-medium">
-                            {`$ ${(price * amount).toFixed(2)}`}
+                            <Price value={price * amount} />
                         </div>
                     </div>
                 </div>
@@ -79,4 +80,4 @@ const MiniBasketItem = ({ item }: { item: CartItem }) => {
     );
 };
 
-export default MiniBasketItem;
+export default BasketItem;
