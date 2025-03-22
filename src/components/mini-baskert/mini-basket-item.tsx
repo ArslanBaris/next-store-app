@@ -70,7 +70,7 @@ const MiniBasketItem = ({ item }: { item: CartItem }) => {
                         </div>
                         {/* total price */}
                         <div className="flex flex-1 justify-end items-center text-primary font-medium">
-                            {`$ ${parseFloat((price * amount).toString()).toFixed(2)}`}
+                            {`$ ${(price * amount).toFixed(2)}`}
                         </div>
                     </div>
                 </div>
