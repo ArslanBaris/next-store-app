@@ -2,6 +2,7 @@ import { APP_NAME } from '@/config/constants'
 import React from 'react'
 import Link from 'next/link'
 import { MiniBasket } from '@/components/basket/mini-basket'
+import { ModeToggle } from '@/components/theme/mode-toggle'
 
 export default function Header() {
     return (
@@ -11,11 +12,9 @@ export default function Header() {
                     <Link href="/" className="text-primary text-2xl font-bold">
                         {APP_NAME}
                     </Link>
-
-                    <div className="flex items-center gap-2">
-                        <div className="block">
-                            <MiniBasket />
-                        </div>
+                    <div className="flex flex-row justify-between items-center gap-3">
+                        <ModeToggle />
+                        <MiniBasket />
                     </div>
                 </div>
             </header>
