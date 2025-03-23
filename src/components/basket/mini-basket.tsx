@@ -1,5 +1,5 @@
 'use client';
-import { ShoppingBag, ShoppingBagIcon, ShoppingBasket, ShoppingBasketIcon, ShoppingCart, Trash, X } from "lucide-react";
+import { ShoppingBasketIcon, ShoppingCart, Trash, X } from "lucide-react";
 import {
     Drawer,
     DrawerClose,
@@ -10,6 +10,11 @@ import {
     DrawerTitle,
     DrawerTrigger,
 } from "@/components/ui/drawer"
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@/components/ui/popover"
 import { Button } from "../ui/button";
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
@@ -17,6 +22,8 @@ import BasketItem from "./basket-item";
 import { Badge } from "../ui/badge";
 import { clearCart } from "@/store/cartSlice";
 import { useRouter } from "next/navigation";
+import { PopoverClose } from "@radix-ui/react-popover";
+import { twJoin } from "tailwind-merge";
 
 export function MiniBasket() {
     const dispatch = useDispatch();
@@ -38,7 +45,7 @@ export function MiniBasket() {
                     <Badge className="absolute -bottom-1 -right-1 text-[11px] w-[20px] h-[19px]" variant={"destructive"} >{totalItems}</Badge>
                 </div>
             </DrawerTrigger>
-            <DrawerContent className="flex flex-col h-full">
+            <DrawerContent className="flex flex-col h-full !w-screen sm:!w-auto">
                 <DrawerHeader>
                     <div className="flex justify-between items-center">
                         <DrawerTitle>Basket ({totalItems})</DrawerTitle>
@@ -48,9 +55,9 @@ export function MiniBasket() {
                     </div>
                     <DrawerDescription>Your selected items</DrawerDescription>
                 </DrawerHeader>
-                <div className="mx-auto w-full max-w-sm flex-grow overflow-y-auto">
+                <div className="mx-auto sm:max-w-sm w-full flex-grow overflow-y-auto">
 
-                    <div className="flex flex-col gap-2 p-4  ">
+                    <div className="flex flex-col gap-2 p-4">
                         {cartItems.length > 0 ? (
                             cartItems.map(item => (
                                 <BasketItem key={item.id} item={item} />
@@ -64,18 +71,39 @@ export function MiniBasket() {
                     </div>
                 </div>
                 <DrawerFooter className="mt-auto">
-                    <div className="flex justify-between items-center font-bold">
+                    <div className="flex justify-between items-center font-bold  h-9">
                         <div className="flex items-center gap-2">
                             <span>Total:</span>
                             <span>$ {totalPrice.toFixed(2)}</span>
                         </div>
-                        <Button
-                            variant={"outline"}
-                            onClick={() => handleClearCart()}
-                            className="text-xl cursor-pointertext-gray-500 hover:text-red-500 transition"
-                        >
-                            <Trash />
-                        </Button>
+
+                        <Popover>
+                            <PopoverTrigger asChild>
+                                <Button
+                                    variant={"outline"}
+                                    className={twJoin(!totalItems && "hidden", "text-xl cursor-pointertext-gray-500 hover:text-red-500 transition")}
+                                >
+                                    <Trash />
+                                </Button>
+                            </PopoverTrigger>
+                            <PopoverContent className="mx-2">
+                                <div className="flex flex-col gap-2">
+                                    <h3 className="text-lg font-semibold">Clear Basket</h3>
+                                    <p>Are you sure you want to clear your basket?</p>
+                                    <div className="flex justify-end gap-2">
+                                        <PopoverClose asChild>
+                                            <Button variant="outline">Cancel</Button>
+                                        </PopoverClose>
+                                        <PopoverClose asChild>
+                                            <Button variant="destructive" onClick={() => handleClearCart()}>Clear</Button>
+                                        </PopoverClose>
+                                    </div>
+                                </div>
+                            </PopoverContent>
+                        </Popover>
+
+
+
                     </div>
                     <DrawerClose asChild>
                         <Button onClick={() => { router.push("/basket") }} >View Cart</Button>
