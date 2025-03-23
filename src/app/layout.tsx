@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { twJoin } from "tailwind-merge";
-import { ThemeProvider } from "next-themes";
 import "./globals.css";
 import { Layout } from "@/components/layout";
-import AppProvider from "@/providers/provider";
+import AppProvider from "@/providers/app-provider";
 import { Toaster } from "sonner"
+import { ThemeProvider } from "@/providers/theme-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -44,7 +44,12 @@ export default function RootLayout({
         )}
       >
         <AppProvider>
-          <ThemeProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
             <Layout>
               {children}
               <Toaster richColors />
