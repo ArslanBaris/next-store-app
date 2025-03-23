@@ -1,5 +1,5 @@
 export interface Product {
-    id: string;
+    id: number;
     title: string;
     description: string;
     image: string;
@@ -12,7 +12,7 @@ export interface Product {
 }
 
 export interface CartItem {
-    id: string;
+    id: number;
     title: string;
     image: string;
     price: number;
