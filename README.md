@@ -1,36 +1,95 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next Store App
 
-## Getting Started
+Next Store App is a sample e-commerce application built with modern web technologies, showcasing features like server-side rendering (SSR), state management, and a responsive UI.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Next.js**: Framework for server-side rendering and static site generation.
+- **React Query**: For efficient data fetching and caching.
+- **Redux Toolkit**: State management with a focus on simplicity and performance.
+- **Redux Persist**: Persists Redux store in localStorage for state persistence.
+- **ShadCN/UI**: Pre-built UI components for a consistent design system.
+- **Tailwind CSS**: Utility-first CSS framework for styling.
+- **TypeScript**: Strongly typed JavaScript for better developer experience.
+- **FakeStore API**: Used as the backend for fetching product data.
+- **Dark and Light Theme**: Supports theme toggling for better user experience.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-repo/next-store-app.git
+   cd next-store-app
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. Install dependencies:
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
 
-## Learn More
+3. Configure environment variables:
+   - Copy `.env.example` to `.env`:
+     ```bash
+     cp .env.example .env
+     ```
+   - Update the `API_URL` variable in the `.env` file with the appropriate backend URL.
 
-To learn more about Next.js, take a look at the following resources:
+4. Run the development server:
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+5. Open [http://localhost:3000](http://localhost:3000) in your browser to see the app.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Scripts
 
-## Deploy on Vercel
+- `dev`: Starts the development server with Turbopack.
+- `build`: Builds the application for production.
+- `start`: Starts the production server.
+- `lint`: Runs ESLint to check for code quality issues.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Technologies Used
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Next.js**: For building the application.
+- **React**: For building UI components.
+- **React Query**: For managing server state.
+- **Redux Toolkit**: For managing global state.
+- **Tailwind CSS**: For styling.
+- **ShadCN/UI**: For pre-built UI components.
+- **TypeScript**: For type safety.
+- **Axios**: For making HTTP requests.
+- **Radix UI**: For accessible UI primitives.
+- **Zod**: For schema validation.
+
+## Project Structure
+
+The project follows a modular structure:
+
+- `src/app`: Contains the main application pages.
+- `src/components`: Reusable UI components.
+- `src/lib`: Utility functions and API integrations.
+- `src/store`: Redux store and slices.
+- `src/config`: Application constants and configuration.
+- `src/types`: TypeScript type definitions.
+
+## API Integration
+
+The app uses the [FakeStore API](https://fakestoreapi.com/) to fetch product data. The API is integrated using Axios and React Query for efficient data fetching and caching.
+
+## Deployment
+
+The app is already deployed on [Vercel](https://vercel.com/) and can be accessed at the following URL:
+
+[https://next-store-app-ashen.vercel.app/](https://next-store-app-ashen.vercel.app/)
+
+## Contributing
+
+Contributions are welcome! Feel free to open issues or submit pull requests.
+
+## License
+
+This project is licensed under the MIT License.
