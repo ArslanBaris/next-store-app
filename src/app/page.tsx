@@ -3,15 +3,14 @@ import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import getQueryClient from "@/query-client/query-client";
 import { fetchProductsQuery } from "@/lib/api";
 import ProductList from "@/components/products/product-list";
-import { routes } from "@/config/constants";
+import { APP_NAME, routes } from "@/config/constants";
 import { getMetadata } from "@/lib/metadata";
 
-
 export const metadata = getMetadata({
-  title: 'Product List',
+  title: APP_NAME,
   pathname: routes.home(),
+  images: [{ url: '/favicon.ico', alt: APP_NAME }],
 });
-
 
 export default async function Home({ searchParams }: { searchParams: Promise<{ category?: string }> }) {
   const { category } = await searchParams;
@@ -19,7 +18,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
   const queryClient = getQueryClient();
   await fetchProductsQuery(queryClient, category);
 
-  const dehydratedState = dehydrate(queryClient); 
+  const dehydratedState = dehydrate(queryClient);
 
   return (
     <div>
@@ -28,7 +27,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
           <Filters />
         </div>
         <HydrationBoundary state={dehydratedState}>
-        <ProductList category={category} />
+          <ProductList category={category} />
         </HydrationBoundary>
       </div>
     </div>

@@ -27,14 +27,14 @@ export function getMetadata({
         siteName: APP_NAME,
         locale: 'en_US',
         images,
-        url: pathname,
+        url: `${APP_URL}${pathname}`,
       },
       twitter: {
-        card: 'summary_large_image',
+        card: 'summary',
         title: metaTitle,
         description: metaDescription,
         images,
-        creator: '@Arslan_1881',
+        creator: '@ArslanBaris',
       },
       alternates: {
         canonical: pathname,
