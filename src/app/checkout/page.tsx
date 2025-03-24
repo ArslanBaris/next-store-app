@@ -12,7 +12,6 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import {
     Form,
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
     FormLabel,
@@ -62,7 +61,7 @@ export default function CheckoutPage() {
         );
     }
 
-    function onSubmit(data: z.infer<typeof formSchema>) {
+    function onSubmit() {
         setLoading(true);
         setTimeout(() => {
             dispatch(clearCart());

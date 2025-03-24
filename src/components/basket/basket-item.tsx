@@ -8,7 +8,6 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import Price from "../ui/price";
 
-
 const BasketItem = ({ item }: { item: CartItem }) => {
 
     const { id, title, image, price, amount } = item;

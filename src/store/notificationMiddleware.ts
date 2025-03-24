@@ -5,7 +5,7 @@ import { PayloadAction } from '@reduxjs/toolkit';
 import { CartItem } from '@/types/product';
 
 
-const notificationMiddleware: Middleware = store => next => (action) => {
+const notificationMiddleware: Middleware = () => next => (action) => {
     if (addToCart.match(action)) {
         const cartAction = action as PayloadAction<CartItem>;
         toast.success(`${cartAction.payload.title}`, {description: "Added to cart!"});
