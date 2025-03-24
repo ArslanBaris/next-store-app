@@ -31,7 +31,7 @@ const BasketItem = ({ item }: { item: CartItem }) => {
                 <div className="w-full flex flex-col">
                     <div className="flex justify-between mb-2 gap-4">
                         <Link
-                            href={`/product/${id}`}
+                            href={`/products/${id}`}
                             className="text-sm font-medium max-w-[350px] text-primary hover:underline line-clamp-2"
                         >
                             {title}
