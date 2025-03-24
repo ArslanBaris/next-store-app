@@ -1,15 +1,20 @@
 import { Filters } from "@/components/filters";
-import ProductCard from "@/components/products/product-card";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import getQueryClient from "@/query-client/query-client";
 import { fetchProductsQuery } from "@/lib/api";
-import { Product } from "@/types/product";
 import ProductList from "@/components/products/product-list";
+import { routes } from "@/config/constants";
+import { getMetadata } from "@/lib/metadata";
 
 
-export default async function Home({ searchParams }: { searchParams: { category?: string } }) {
-  const category = searchParams.category;
+export const metadata = getMetadata({
+  title: 'Product List',
+  pathname: routes.home(),
+});
 
+
+export default async function Home({ searchParams }: { searchParams: Promise<{ category?: string }> }) {
+  const { category } = await searchParams;
 
   const queryClient = getQueryClient();
   await fetchProductsQuery(queryClient, category);
