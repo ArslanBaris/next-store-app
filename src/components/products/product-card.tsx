@@ -52,7 +52,7 @@ function ProductCard({ product }: { product: Product }) {
                             <Price className="text-green-700 font-semibold" value={product.price} />
                         </div>
 
-                        <div className="flex flex-row gap-2 items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                        <div className="flex flex-row gap-2 items-center justify-center sm:opacity-0 group-hover:opacity-100 transition-opacity">
                             <Button className="w-full" variant={"success"} onClick={(e) => { e.stopPropagation(); handleAddToCart(); }}>
                                 Add to Cart
                             </Button>

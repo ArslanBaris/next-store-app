@@ -56,7 +56,7 @@ export default function CheckoutPage() {
 
                 <p className="text-gray-500 mt-2">Thank you for your purchase. Your order has been successfully placed.</p>
 
-                <Button className="w-[25%] mt-4" variant="success" onClick={() => { router.push('/') }}>Continue Shopping</Button>
+                <Button className="w-[50%] sm:w-[30%]  mt-4" variant="success" onClick={() => { router.push('/') }}>Continue Shopping</Button>
             </div>
         );
     }
@@ -78,9 +78,9 @@ export default function CheckoutPage() {
                         <CardTitle>Order Summary</CardTitle>
                     </CardHeader>
                     <CardContent>
-                        <div className="flex flex-col gap-2">
+                        <div className="flex flex-col gap-3">
                             {cartItems.map(item => (
-                                <div key={item.id} className="flex justify-between text-gray-500 font-light text-md gap-2">
+                                <div key={item.id} className="flex justify-between text-gray-500 font-light text-md gap-4">
                                     <p>{item.title} x {item.amount}</p>
                                     <Price className='whitespace-nowrap' value={item.price * item.amount} />
                                 </div>
