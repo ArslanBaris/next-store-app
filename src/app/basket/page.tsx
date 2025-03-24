@@ -43,7 +43,9 @@ export default function BasketPage() {
                                     ) : (
                                         <div className="text-center text-gray-500 min-h-[300px] items-center flex flex-col justify-center gap-2">
                                             <ShoppingCart />
-                                            Your basket is empty
+                                            Your basket is empt
+                                            <Button className="w-[50%] sm:w-[30%]  mt-4" variant="success" onClick={() => { router.push('/') }}>Continue Shopping</Button>
+
                                         </div>
                                     )}
                             </CardContent>

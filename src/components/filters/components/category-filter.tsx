@@ -37,17 +37,17 @@ export function CategoryFilter({ categories }: CategoryFilterProps) {
     }
 
     return (
-        <div className='flex flex-wrap gap-2'>
+        <div className='flex flex-row gap-3'>
             <Button key={"all"} variant={searchParams.get('category') ? 'outline' : 'default'} onClick={() => handleCategorySelect()}>
                 <span>All</span>
             </Button>
             <Carousel
-                className="w-auto"
+                className="w-auto overflow-x-auto whitespace-nowrap"
             >
-                <CarouselContent>
+                <CarouselContent className="flex">
                     {
                         categories && categories.map((category: string) => (
-                            <CarouselItem key={category} className="w-auto basis-auto">
+                            <CarouselItem key={category} className="inline-block w-auto basis-auto">
                                 <Button key={category} variant={isChecked(category) ? 'default' : 'outline'} onClick={() => handleCategorySelect(category)}>
                                     {getCategoryName(category)}
                                     {
