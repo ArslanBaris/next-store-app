@@ -30,11 +30,11 @@ export function getMetadata({
         url: `${APP_URL}${pathname}`,
       },
       twitter: {
-        card: 'summary_large_image',
+        card: 'summary',
         title: metaTitle,
         description: metaDescription,
         images,
-        creator: '@Arslan_1881',
+        creator: '@ArslanBaris',
       },
       alternates: {
         canonical: pathname,
