@@ -52,7 +52,7 @@ export default function RootLayout({
           >
             <Layout>
               {children}
-              <Toaster richColors />
+              <Toaster richColors position="bottom-left" />
             </Layout>
           </ThemeProvider>
         </AppProvider>

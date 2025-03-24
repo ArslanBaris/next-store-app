@@ -19,10 +19,13 @@ import {
 } from "@/components/ui/drawer"
 import { useEffect, useRef, useState } from 'react';
 import Price from '@/components/ui/price';
+import { useRouter } from 'next/navigation';
+import { twJoin } from 'tailwind-merge';
 
 
 export default function BasketPage() {
     const dispatch = useDispatch();
+    const router = useRouter();
     const cartItems = useSelector((state: RootState) => state.cart.cartItems);
     const subTotal = cartItems.reduce((total, item) => total + item.price * item.amount, 0);
     const totalItems = cartItems.reduce((total, item) => total + item.amount, 0);
@@ -45,7 +48,7 @@ export default function BasketPage() {
                 <PageTitle title={"Basket"} />
                 <div className='flex flex-row gap-3'>
 
-                    <div className='w-full md:w-2/3'>
+                    <div className={twJoin('w-full md:w-2/3', !totalItems && 'md:w-full')}>    
                         <Card>
                             <CardContent>
                                 {
@@ -62,7 +65,7 @@ export default function BasketPage() {
                             </CardContent>
                         </Card>
                     </div>
-                    <div className='hidden md:block w-1/3'>
+                    <div className={twJoin('hidden md:block w-1/3', !totalItems && 'md:hidden')}>    
                         <Card>
                             <CardHeader>
                                 <CardTitle>Summary</CardTitle>
@@ -81,7 +84,7 @@ export default function BasketPage() {
                                      <Price value={subTotal + 5} />
                                 </div>
                                 <div className="mt-5">
-                                    <Button className='w-full' variant={"default"} >Go to Checkout</Button>
+                                    <Button className='w-full' variant={"default"} onClick={()=> { router.push("/checkout") }} >Go to Checkout</Button>
                                 </div>
                             </CardContent>
                         </Card>
@@ -90,7 +93,7 @@ export default function BasketPage() {
             </div>
 
 
-            <Card ref={summaryCardRef} className='w-screen fixed left-0 bottom-0 md:hidden'>
+            <Card ref={summaryCardRef} className={twJoin(!totalItems && 'hidden' ,'w-screen fixed left-0 bottom-0 md:hidden')}>
                 <CardHeader className='pb-0 gap-0'>
                     <CardTitle>Summary</CardTitle>
                 </CardHeader>
@@ -109,7 +112,7 @@ export default function BasketPage() {
                             <p>$ {(subTotal + 5).toFixed(2)}</p>
                         </div>
                     </div>
-                    <Button className='w-full' variant={"default"} >Go to Checkout</Button>
+                    <Button className='w-full' variant={"default"} onClick={()=> { router.push("/checkout") }} >Continue to Checkout</Button>
                 </CardContent>
             </Card>
         </>

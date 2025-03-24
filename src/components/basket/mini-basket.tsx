@@ -45,7 +45,7 @@ export function MiniBasket() {
                     <Badge className="absolute -bottom-1 -right-1 text-[11px] w-[20px] h-[19px]" variant={"destructive"} >{totalItems}</Badge>
                 </div>
             </DrawerTrigger>
-            <DrawerContent className="flex flex-col h-full !w-screen sm:!w-auto">
+            <DrawerContent className="flex flex-col h-full !w-screen sm:w-md">
                 <DrawerHeader>
                     <div className="flex justify-between items-center">
                         <DrawerTitle>Basket ({totalItems})</DrawerTitle>
@@ -77,7 +77,7 @@ export function MiniBasket() {
                             <span>$ {totalPrice.toFixed(2)}</span>
                         </div>
 
-                        <Popover>
+                        <Popover key={totalItems}>
                             <PopoverTrigger asChild>
                                 <Button
                                     variant={"outline"}
@@ -95,8 +95,10 @@ export function MiniBasket() {
                                             <Button variant="outline">Cancel</Button>
                                         </PopoverClose>
                                         <PopoverClose asChild>
+
                                             <Button variant="destructive" onClick={() => handleClearCart()}>Clear</Button>
                                         </PopoverClose>
+
                                     </div>
                                 </div>
                             </PopoverContent>
@@ -106,7 +108,7 @@ export function MiniBasket() {
 
                     </div>
                     <DrawerClose asChild>
-                        <Button onClick={() => { router.push("/basket") }} >View Cart</Button>
+                        <Button disabled={!totalItems} onClick={() => { router.push("/basket") }} >View Cart</Button>
                     </DrawerClose>
                     <DrawerClose asChild>
                         <Button variant="outline">Continue to Shopping</Button>
