@@ -8,7 +8,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import Price from "../ui/price";
 
-const BasketItem = ({ item, onCloseDrawer }: { item: CartItem, onCloseDrawer: () => void }) => {
+const BasketItem = ({ item, onCloseDrawer }: { item: CartItem, onCloseDrawer?: () => void }) => {
 
     const { id, title, image, price, amount } = item;
 
