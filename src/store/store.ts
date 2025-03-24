@@ -18,7 +18,12 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
   reducer: persistedReducer,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(notificationMiddleware),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+    serializableCheck: {
+      // redux-persist'in seri hale getirilemeyen değerlerini yoksay
+      ignoredActions: ['persist/PERSIST', 'persist/REHYDRATE'],
+    },
+  }).concat(notificationMiddleware),
 });
 
 export const persistor = persistStore(store);
