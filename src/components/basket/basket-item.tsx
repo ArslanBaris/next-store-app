@@ -8,7 +8,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import Price from "../ui/price";
 
-const BasketItem = ({ item }: { item: CartItem }) => {
+const BasketItem = ({ item, onCloseDrawer }: { item: CartItem, onCloseDrawer: () => void }) => {
 
     const { id, title, image, price, amount } = item;
 
@@ -25,7 +25,7 @@ const BasketItem = ({ item }: { item: CartItem }) => {
     return (
         <div className="flex gap-x-4 lg:px-3 border-b border-gray-200 w-full font-light text-gray-500">
             <div className="w-full min-h-[130px] flex items-center gap-x-4">
-                <Link href={`/products/${id}`}>
+                <Link href={`/products/${id}`} onClick={onCloseDrawer}>
                     <Image src={image} alt={title} width={80} height={80} />
                 </Link>
                 <div className="w-full flex flex-col">
@@ -33,6 +33,7 @@ const BasketItem = ({ item }: { item: CartItem }) => {
                         <Link
                             href={`/products/${id}`}
                             className="text-sm font-medium max-w-[350px] text-primary hover:underline line-clamp-2"
+                            onClick={onCloseDrawer}
                         >
                             {title}
                         </Link>

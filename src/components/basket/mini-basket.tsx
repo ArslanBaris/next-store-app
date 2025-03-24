@@ -24,10 +24,12 @@ import { clearCart } from "@/store/cartSlice";
 import { useRouter } from "next/navigation";
 import { PopoverClose } from "@radix-ui/react-popover";
 import { twJoin } from "tailwind-merge";
+import { useState } from "react";
 
 export function MiniBasket() {
     const dispatch = useDispatch();
     const router = useRouter();
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
     const cartItems = useSelector((state: RootState) => state.cart.cartItems);
     const totalPrice = cartItems.reduce((total, item) => total + item.price * item.amount, 0);
@@ -37,8 +39,12 @@ export function MiniBasket() {
         dispatch(clearCart());
     };
 
+    const handleDrawerClose = () => {
+        setIsDrawerOpen(false);
+    };
+
     return (
-        <Drawer direction="right" >
+        <Drawer direction="right" open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
             <DrawerTrigger asChild>
                 <div className="relative cursor-pointer p-2 rounded-full hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50" >
                     <ShoppingBasketIcon size={25} />
@@ -60,7 +66,7 @@ export function MiniBasket() {
                     <div className="flex flex-col gap-2 p-4">
                         {cartItems.length > 0 ? (
                             cartItems.map(item => (
-                                <BasketItem key={item.id} item={item} />
+                                <BasketItem key={item.id} item={item} onCloseDrawer={handleDrawerClose} />
                             ))
                         ) : (
                             <div className="text-center text-gray-500 min-h-[300px] items-center flex flex-col justify-center gap-2">
