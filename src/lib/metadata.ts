@@ -27,7 +27,7 @@ export function getMetadata({
         siteName: APP_NAME,
         locale: 'en_US',
         images,
-        url: pathname,
+        url: `${APP_URL}${pathname}`,
       },
       twitter: {
         card: 'summary_large_image',
