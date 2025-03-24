@@ -1,28 +1,20 @@
 import { Filters } from "@/components/filters";
 import ProductCard from "@/components/products/product-card";
-import axios from "axios";
+import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
+import getQueryClient from "@/query-client/query-client";
+import { fetchProductsQuery } from "@/lib/api";
+import { Product } from "@/types/product";
+import ProductList from "@/components/products/product-list";
 
-export default async function Home({
-  searchParams,
-}: {
-  searchParams: Record<string, string>;
-}) {
 
-  
-  const categoryFilter = searchParams.category ? `/category/${searchParams.category}` : "";
-  const sortOption = searchParams.sort ? `?sort=${searchParams.sort}` : "";
+export default async function Home({ searchParams }: { searchParams: { category?: string } }) {
+  const category = searchParams.category;
 
-  const products = await axios.get(process.env.NEXT_PUBLIC_API_URL + `products/${categoryFilter}${sortOption}`, {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  }).then((response) => {
-    console.log(response.data);
-    return response.data;
-  }).catch((error) => {
-    console.error(error);
-  });
 
+  const queryClient = getQueryClient();
+  await fetchProductsQuery(queryClient, category);
+
+  const dehydratedState = dehydrate(queryClient); 
 
   return (
     <div>
@@ -30,11 +22,9 @@ export default async function Home({
         <div className="sticky top-0  max-h-[80vh] overflow-x-auto block">
           <Filters />
         </div>
-        <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
-          {products && products.map((product: any) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </ul>
+        <HydrationBoundary state={dehydratedState}>
+        <ProductList category={category} />
+        </HydrationBoundary>
       </div>
     </div>
   );

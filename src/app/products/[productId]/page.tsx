@@ -1,8 +1,8 @@
 import { PageTitle } from "@/components/products/page-title";
 import { ProductInfo } from "@/components/products/product-info";
 import { Card, CardContent } from "@/components/ui/card";
+import { fetchProductById } from "@/lib/api";
 import axios from "axios";
-
 
 type ProductPageProps = {
     params: Promise<{
@@ -13,22 +13,7 @@ type ProductPageProps = {
 export default async function ProductPage(props: ProductPageProps) {
     const { productId } = await props.params;
 
-    console.log(productId);
-
-    const config = {
-        headers: {
-            'Content-Type': 'application/json',
-        }
-    };
-
-    const product = await axios.get(process.env.NEXT_PUBLIC_API_URL + `products/${productId}`, config)
-        .then((response) => {
-            console.log(response.data);
-            return response.data;
-        }).catch((error) => {
-            console.error(error);
-        });
-
+    const product = await fetchProductById(productId);
 
     return (
         <div className="flex flex-col gap-4 mb-3">
